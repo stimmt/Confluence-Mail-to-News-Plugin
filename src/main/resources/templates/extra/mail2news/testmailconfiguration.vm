@@ -1,0 +1,14 @@
+<html>
+	<head>Test Mail Configuration</head>
+	
+	<body>
+		<div class="thickPadded">
+			Configuration tested.<br/>
+			<br/>
+			Result: ${configurationTestResult}<br/>
+			<br/>
+			<a href="editmailconfiguration.action">Edit the configuration</a>
+		</div>	
+	</body>
+	
+</html>

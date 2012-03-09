@@ -1,0 +1,94 @@
+<html>
+	<head>Edit Mail Configuration</head>
+	
+	<script type="text/javascript">
+		function setPort()
+		{
+			// get the SSL checkbox element
+			var sslField = document.editmailconfiguration_form.elements[2];
+			// get the protocol select element
+			var protocolField = document.editmailconfiguration_form.elements[1];
+			// get the currently selected protocol from the select element
+			var protocol = protocolField.options[protocolField.options.selectedIndex].value;
+			// get the port textfield
+			var portField = document.editmailconfiguration_form.elements[3];
+			if (sslField.checked)
+			{
+				// SSL is checkded
+				// set port according to selected protocol
+				if (protocol == 'IMAP')
+				{
+					portField.value = '993';
+				}
+				else if (protocol == 'POP3')
+				{
+					portField.value = '995';
+				}
+				else
+				{
+					// error
+					portField.value = '0';
+				}
+			}
+			else
+			{
+				// SSL is not set
+				// set port according to selected protocol
+				if (protocol == 'IMAP')
+				{
+					portField.value = '143';
+				}
+				else if (protocol == 'POP3')
+				{
+					portField.value = '110';
+				}
+				else
+				{
+					// error
+					portField.value = '0';
+				}
+			}
+		}
+	</script>
+	
+	<body>
+		<div class="thickPadded">
+			<form name="editmailconfiguration_form" method="POST" action="doeditmailconfiguration.action">
+				<table class="greyBox" width="400" cellpadding="2" cellspacing="4">
+					#tag( TextField "label='Server'" "name='mailConfiguration.server'" "size='50'" )
+					#tag( Select "label='Protocol'" "name='mailConfiguration.protocol'" "list={'IMAP', 'POP3'}" "onchange='setPort()'")
+					<tr>
+    					<td nowrap align="right"  valign="top"  >
+    						<label class="label" for="mailConfiguration.secure">Use SSL:</label>
+    					</td>
+    					<td>
+    						<input type="checkbox" name="mailConfiguration.secure" id="mailConfiguration.secure" value="true" #if ($mailConfiguration.secure) checked="checked" #end onclick="setPort()"/>
+          				</td>
+    				</tr>    
+					#tag( TextField "label='Port'" "name='mailConfiguration.port'" "id='portField'" "size='4'" )
+					#tag( TextField "label='Username'" "name='mailConfiguration.username'" "size='50'" )
+					#tag( TextField "label='Password'" "name='mailConfiguration.password'" "size='50'" )
+					<tr>
+    					<td nowrap align="right"  valign="top"  >
+    						<label class="label" for="mailConfiguration.gallerymacro">Enable Gallery Macro:</label>
+    					</td>
+    					<td>
+							<input type="checkbox" name="mailConfiguration.gallerymacro" id="mailConfiguration.gallerymacro" value="true" #if ($mailConfiguration.gallerymacro) checked="checked" #end/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center">
+							<br/>
+							#tag( Submit "name='confirm'" "value='update.name'" "theme='notable'" )
+        				</td>
+					</tr>
+				</table>
+			</form>
+			<br/>
+			<form name="testmailconfiguration.form" method="POST" action="testmailconfiguration.action">
+				#tag( Submit "name='confirm'" "value='Test Configuration'" "theme='notable'" )
+			</form>
+		</div>	
+	</body>
+	
+</html>

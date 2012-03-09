@@ -1,0 +1,40 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+		<param name="configure.url">/admin/plugins/mail2news/editmailconfiguration.action</param>
+    </plugin-info>
+
+	<job key="mail2news-plugin" name="mail2news Job" class="com.midori.confluence.plugin.mail2news.Mail2NewsJob">
+		<description>The mail2news job which, when triggered, retrieves mail from a specified account and adds them as news to a space.</description>
+    </job>
+
+    <trigger key="mail2newsTrigger" name="mail2news Trigger">       
+        <job key="mail2news-plugin" />       
+        <schedule cron-expression="0 0/5 * * * ?" />
+        <description>The trigger which executes the mail2news job every 5 minutes.</description>
+    </trigger>
+    
+    <xwork name="Configure Mail Action" key="mailconfigurationactions">
+        <description>Actions for editing the mail configuration of the mail2news plugin.</description>
+
+         <package name="mail2news" extends="default" namespace="/admin/plugins/mail2news">
+            <default-interceptor-ref name="defaultStack" />
+
+            <action name="editmailconfiguration" class="com.midori.confluence.plugin.mail2news.actions.ConfigurationAction" method="doDefault">
+                <result name="input" type="velocity">/templates/extra/mail2news/editmailconfiguration.vm</result>
+            </action>
+
+            <action name="doeditmailconfiguration" class="com.midori.confluence.plugin.mail2news.actions.ConfigurationAction">
+                <result name="input" type="velocity">/templates/extra/mail2news/editmailconfiguration.vm</result>
+                <result name="success" type="velocity">/templates/extra/mail2news/mailconfigurationsaved.vm</result>
+            </action>
+            
+            <action name="testmailconfiguration" class="com.midori.confluence.plugin.mail2news.actions.ConfigurationAction" method="testConfiguration">
+                <result name="success" type="velocity">/templates/extra/mail2news/testmailconfiguration.vm</result>
+            </action>
+            
+        </package>
+    </xwork>
+</atlassian-plugin>

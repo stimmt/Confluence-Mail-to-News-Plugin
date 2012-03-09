@@ -1,0 +1,3 @@
+Confluence Mail to News Plugin
+
+Post news entries using email. This is a simple plugin which can monitor an IMAP/S or POP3/S mailbox and publish emails as news entries. Special about it is that the space, in which the news should be published can be defined as an email-address wildcard (email+spacekey@domain.net).

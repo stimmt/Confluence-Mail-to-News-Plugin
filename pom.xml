@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>com.atlassian.confluence.plugin.base</groupId>
+        <artifactId>confluence-plugin-base</artifactId>
+        <version>27</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.midori.confluence.plugin</groupId>
+    <artifactId>mail2news</artifactId>
+    <version>1.9.0</version>
+
+    <organization>
+        <name>Stimmt AG - Midori</name>
+        <url>http://www.stimmt.ch</url>
+    </organization>
+
+    <name>Mail to News Plugin</name>
+    <packaging>atlassian-plugin</packaging>
+    <description>This plugin retrieves mails from an email account, and adds them as news to the wiki space indicated in the email address (e.g. wiki+spacekey@domain.net).</description>
+    <url>https://plugins.atlassian.com/13214</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence</artifactId>
+            <version>${confluence.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.confluence.plugin</groupId>
+            <artifactId>func-test</artifactId>
+            <version>2.1.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+		<plugins>  
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-confluence-plugin</artifactId>
+                <version>3.0-rc1</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <productVersion>${confluence.version}</productVersion>
+                    <productDataVersion>${confluence.data.version}</productDataVersion>
+                    <skipManifestValidation>true</skipManifestValidation>
+                </configuration>
+            </plugin>
+			<plugin>  
+				<artifactId>maven-compiler-plugin</artifactId>  
+				<configuration>  
+					<source>1.5</source>  
+					<target>1.5</target>  
+				</configuration>  
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+						<manifestEntries>
+							<Built-By>Ferenc Kiss</Built-By>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>bin</descriptorRef>
+						<descriptorRef>src</descriptorRef>
+					</descriptorRefs>
+				</configuration>			
+			</plugin>			
+		</plugins> 
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>atlassian-contrib</id>
+            <name>Atlassian Contrib Repository</name>
+            <url>dav:https://maven.atlassian.com/contrib</url>
+        </repository>
+        <snapshotRepository>
+            <id>atlassian-contrib-snapshot</id>
+            <name>Atlassian Contrib Snapshot Repository</name>
+            <url>dav:https://maven.atlassian.com/contrib-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <properties>
+        <confluence.version>4.1.6</confluence.version>
+        <confluence.data.version>3.2</confluence.data.version>
+    </properties>
+
+</project>
+

@@ -1,0 +1,18 @@
+<html>
+	<head>Mail Configuration Saved</head>
+	
+	<body>
+		<div class="thickPadded">
+			The mail configuration has been saved. The new settings are directly active, there
+			is no need to reload the plugin.<br/>
+			<br/>
+			<a href="editmailconfiguration.action">Edit the configuration</a><br/>
+			<br/>
+			<br/>
+			<form name="testmailconfiguration.form" method="POST" action="testmailconfiguration.action">
+				#tag( Submit "name='confirm'" "value='Test Configuration'" "theme='notable'" )
+			</form>
+		</div>	
+	</body>
+	
+</html>
