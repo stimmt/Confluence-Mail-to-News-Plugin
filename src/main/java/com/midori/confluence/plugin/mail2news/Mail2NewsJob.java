@@ -85,6 +85,7 @@ import com.atlassian.confluence.spaces.Space;
 import com.atlassian.confluence.spaces.SpaceManager;
 import com.atlassian.confluence.user.AuthenticatedUserThreadLocal;
 import com.atlassian.confluence.user.UserAccessor;
+import com.atlassian.confluence.util.GeneralUtil;
 import com.atlassian.mail.MailFactory;
 import com.atlassian.mail.server.SMTPMailServer;
 import com.atlassian.quartz.jobs.AbstractJob;
@@ -1034,12 +1035,16 @@ public class Mail2NewsJob extends AbstractJob {
 		String title = m.getSubject();
 		/* check for illegal characters in the title and replace them with a space */
 		/* could be replaced with a regex */
-		char[] illegalCharacters = {':', '@', '/', '%', '\\', '&', '!', '|', '#', '$', '*', ';', '~', '[', ']', '(', ')', '{', '}', '<', '>', '.'};
-		for (int i = 0; i < illegalCharacters.length; i++)
-		{
-			if (title.indexOf(illegalCharacters[i]) != -1)
+		/* Only needed for Confluence < 4.1 */
+		String version = GeneralUtil.getVersionNumber();
+		if (!Pattern.matches("^4\\.[1-9]+.*$", version)) {
+			char[] illegalCharacters = {':', '@', '/', '%', '\\', '&', '!', '|', '#', '$', '*', ';', '~', '[', ']', '(', ')', '{', '}', '<', '>', '.'};
+			for (int i = 0; i < illegalCharacters.length; i++)
 			{
-				title = title.replace(illegalCharacters[i], ' ');
+				if (title.indexOf(illegalCharacters[i]) != -1)
+				{
+					title = title.replace(illegalCharacters[i], ' ');
+				}
 			}
 		}
 		blogPost.setTitle(title);
@@ -1060,7 +1065,7 @@ public class Mail2NewsJob extends AbstractJob {
 			{
 				/* found a matching user for the email address of the sender */
 				creator = (User)l.get(0);
-				creatorName = creator.getFullName();
+				creatorName = creator.getName();
 			}
 		}
 

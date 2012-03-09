@@ -12,8 +12,9 @@
 
     <trigger key="mail2newsTrigger" name="Mail to News Trigger">       
         <job key="mail2news-plugin" />       
-        <schedule cron-expression="0 0/5 * * * ?" />
         <description>Executes the job every 5 minutes.</description>
+        <schedule cron-expression="0 0/5 * * * ?" />
+		<managed editable="true" keepingHistory="true" canRunAdhoc="true" canDisable="true"/>
     </trigger>
     
     <xwork name="Configure Mail Action" key="mailconfigurationactions">
