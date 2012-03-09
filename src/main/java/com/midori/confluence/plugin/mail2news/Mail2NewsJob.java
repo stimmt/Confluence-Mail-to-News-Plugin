@@ -116,7 +116,7 @@ public class Mail2NewsJob extends AbstractJob {
 	private AttachmentManager attachmentManager;
 
 	/**
-	 * The user accessor of this Confluene instance, used to find
+	 * The user accessor of this Confluence instance, used to find
 	 * users.
 	 */
 	private UserAccessor userAccessor;
@@ -602,12 +602,17 @@ public class Mail2NewsJob extends AbstractJob {
 	 * @param m The message which produced an error while handling it.
 	 * @param error The error string.
 	 */
-	private void sendErrorMessage(Message m, String error) throws Exception
+	private void sendErrorMessage(Message m, String error) throws Exception // FIXME this method should use the higher level email sending facilities in confluence instead of this low level approach
 	{
 		/* get the SMTP mail server */
 		SMTPMailServer smtpMailServer = MailFactory.getServerManager().getDefaultSMTPMailServer();
 		if(smtpMailServer == null) {
 			log.warn("Failed to send error message as no SMTP server is configured");
+			return;
+		}
+
+		if(smtpMailServer.getHostname() == null) {
+			log.warn("Failed to send error message as JNDI bound SMTP servers are not supported (JNDI location:<" + smtpMailServer.getJndiLocation() + ">)");
 			return;
 		}
 
@@ -718,7 +723,7 @@ public class Mail2NewsJob extends AbstractJob {
 			return;
 		}
 
-		log.info("Content-Type: " + contentType);
+		log.debug("Content-Type: " + contentType);
 
 		/* check if the content is printable */
 		if (contentType.toLowerCase().startsWith("text/plain") && blogEntryContent == null)
@@ -842,7 +847,7 @@ public class Mail2NewsJob extends AbstractJob {
 						Charset characterSet = Charset.forName(charsetString);
 						return characterSet;
 					} catch (Exception e) {
-						log.warn("Unsupported charset in email content (" + charsetString + "). Some characters may be wrong.",  e);
+						log.warn("Unsupported charset in email content (" + charsetString + "). Some characters may be wrong.");
 						return null;
 					}
 				}
