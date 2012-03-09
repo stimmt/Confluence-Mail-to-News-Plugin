@@ -12,7 +12,7 @@ def send(to, cc, subject, body):
 	msg['From'] = me
 	msg['To'] = to
 	msg['Cc'] = cc
-	msg['Subject'] = time.strftime('%X') + ' - Test for Mail to News Plugin: ' + subject
+	msg['Subject'] = '@' + time.strftime('%X') + ' - Test for Mail to News Plugin: ' + subject + '!'
 
 	# send
 	print 'sending to:<{0}>, cc:<{1}>'.format(to, cc)
