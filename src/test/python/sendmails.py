@@ -12,13 +12,13 @@ def send(to, cc, subject, body):
 	msg['From'] = me
 	msg['To'] = to
 	msg['Cc'] = cc
-	msg['Subject'] = time.strftime('%X') + ' - Test for Mail To News Plugin: ' + subject
+	msg['Subject'] = time.strftime('%X') + ' - Test for Mail to News Plugin: ' + subject
 
 	# send
-	print 'sending to {0}...'.format(to)
+	print 'sending to:<{0}>, cc:<{1}>'.format(to, cc)
 	s = smtplib.SMTP('mail.t-online.hu', 25)
 	s.starttls()
-	s.login('xxx@yyy.hu', 'zzz')
+	s.login('', '')
 	s.sendmail(me, [to, cc], msg.as_string())
 	s.quit()
 
