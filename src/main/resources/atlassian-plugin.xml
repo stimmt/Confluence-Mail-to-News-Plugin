@@ -6,18 +6,18 @@
 		<param name="configure.url">/admin/plugins/mail2news/editmailconfiguration.action</param>
     </plugin-info>
 
-	<job key="mail2news-plugin" name="mail2news Job" class="com.midori.confluence.plugin.mail2news.Mail2NewsJob">
-		<description>The mail2news job which, when triggered, retrieves mail from a specified account and adds them as news to a space.</description>
+	<job key="mail2news-plugin" name="Mail to News Job" class="com.midori.confluence.plugin.mail2news.Mail2NewsJob">
+		<description>Retrieves mail from a specified account and adds them as news to a space.</description>
     </job>
 
-    <trigger key="mail2newsTrigger" name="mail2news Trigger">       
+    <trigger key="mail2newsTrigger" name="Mail to News Trigger">       
         <job key="mail2news-plugin" />       
         <schedule cron-expression="0 0/5 * * * ?" />
-        <description>The trigger which executes the mail2news job every 5 minutes.</description>
+        <description>Executes the job every 5 minutes.</description>
     </trigger>
     
     <xwork name="Configure Mail Action" key="mailconfigurationactions">
-        <description>Actions for editing the mail configuration of the mail2news plugin.</description>
+        <description>Actions for editing the mail configuration for the Mail to News Plugin.</description>
 
          <package name="mail2news" extends="default" namespace="/admin/plugins/mail2news">
             <default-interceptor-ref name="defaultStack" />
