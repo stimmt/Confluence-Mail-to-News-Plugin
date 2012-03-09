@@ -1,12 +1,13 @@
 <html>
-	<head>Mail Configuration Saved</head>
+	<head>Email Configuration Saved</head>
 	
 	<body>
 		<div class="thickPadded">
-			The mail configuration has been saved. The new settings are directly active, there
-			is no need to reload the plugin.<br/>
+			<div class="steptitle">Mail to News: Email Configuration Saved</div>
 			<br/>
-			<a href="editmailconfiguration.action">Edit the configuration</a><br/>
+			The new settings are now active, there is no need to reload the plugin.<br/>
+			<br/>
+			<a href="editmailconfiguration.action">Edit configuration</a><br/>
 			<br/>
 			<br/>
 			<form name="testmailconfiguration.form" method="POST" action="testmailconfiguration.action">

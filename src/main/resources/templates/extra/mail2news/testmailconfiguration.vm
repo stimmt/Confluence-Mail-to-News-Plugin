@@ -1,14 +1,13 @@
 <html>
-	<head>Test Mail Configuration</head>
+	<head>EMail Configuration Tested</head>
 	
 	<body>
 		<div class="thickPadded">
-			Configuration tested.<br/>
+			<div class="steptitle">Mail to News: Email Configuration Tested</div>
 			<br/>
-			Result: ${configurationTestResult}<br/>
+			<b>Result:</b> ${configurationTestResult}<br/>
 			<br/>
-			<a href="editmailconfiguration.action">Edit the configuration</a>
+			<a href="editmailconfiguration.action">Edit configuration</a>
 		</div>	
-	</body>
-	
+	</body>	
 </html>

@@ -1,5 +1,5 @@
 <html>
-	<head>Edit Mail Configuration</head>
+	<head>Email Configuration</head>
 	
 	<script type="text/javascript">
 		function setPort()
@@ -55,6 +55,11 @@
 		<div class="thickPadded">
 			<form name="editmailconfiguration_form" method="POST" action="doeditmailconfiguration.action">
 				<table class="greyBox" width="400" cellpadding="2" cellspacing="4">
+					<tr>
+						<td colspan="2">
+							<div class="steptitle">Mail to News: Email Configuration</div>
+						</td>
+					</tr>
 					#tag( TextField "label='Server'" "name='mailConfiguration.server'" "size='50'" )
 					#tag( Select "label='Protocol'" "name='mailConfiguration.protocol'" "list={'IMAP', 'POP3'}" "onchange='setPort()'")
 					<tr>
@@ -77,13 +82,13 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center">
-							<br/>
+						<td colspan="2" style="text-align: center">
 							#tag( Submit "name='confirm'" "value='update.name'" "theme='notable'" )
         				</td>
 					</tr>
 				</table>
 			</form>
+			<br/>
 			<br/>
 			<form name="testmailconfiguration.form" method="POST" action="testmailconfiguration.action">
 				#tag( Submit "name='confirm'" "value='Test Configuration'" "theme='notable'" )
