@@ -21,7 +21,7 @@
 
     <name>Mail to News Plugin</name>
     <packaging>atlassian-plugin</packaging>
-    <description>This plugin retrieves mails from an email account, and adds them as news to the wiki space indicated in the email address (e.g. wiki+spacekey@domain.net).</description>
+    <description>Retrieves mails from an email account, and adds them as news to the wiki space indicated in the email address (e.g. wiki+spacekey@domain.net).</description>
     <url>https://plugins.atlassian.com/13214</url>
 
     <dependencies>
