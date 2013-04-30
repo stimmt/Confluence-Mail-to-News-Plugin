@@ -108,8 +108,12 @@
     </distributionManagement>
 
     <properties>
-        <confluence.version>4.1.6</confluence.version>
-        <confluence.data.version>3.2</confluence.data.version>
+        <confluence.version>5.0</confluence.version>
+        <confluence.data.version>3.5</confluence.data.version>
+        <amps.version>4.1.7</amps.version>
+        <upm.license.compatibility.version>2.4.1</upm.license.compatibility.version>
+        <sal.api.version>2.4.0</sal.api.version>
+        <atlassian.templaterenderer.version>1.0.5</atlassian.templaterenderer.version>
     </properties>
 
 </project>
