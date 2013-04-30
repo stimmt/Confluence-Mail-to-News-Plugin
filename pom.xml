@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.midori.confluence.plugin</groupId>
     <artifactId>mail2news</artifactId>
-    <version>1.9.0</version>
+    <version>1.10.0</version>
     <organization>
         <name>Stimmt AG - Midori</name>
         <url>http://www.stimmt.ch</url>
