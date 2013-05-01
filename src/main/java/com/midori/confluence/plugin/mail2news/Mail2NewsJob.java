@@ -639,10 +639,10 @@ public class Mail2NewsJob extends AbstractJob {
 
 		/* send the message */
 		Transport tr = session.getTransport("smtp");
-		if(StringUtils.isBlank(smtpMailServer.getSmtpPort())) {
+		if(StringUtils.isBlank(smtpMailServer.getPort())) {
 			tr.connect(smtpMailServer.getHostname(), smtpMailServer.getUsername(), smtpMailServer.getPassword());
 		} else {
-			int smtpPort = Integer.parseInt(smtpMailServer.getSmtpPort());
+			int smtpPort = Integer.parseInt(smtpMailServer.getPort());
 			tr.connect(smtpMailServer.getHostname(), smtpPort, smtpMailServer.getUsername(), smtpMailServer.getPassword());
 		}
 		message.saveChanges();
