@@ -18,7 +18,7 @@ def send(to, cc, subject, body):
 	print 'sending to:<{0}>, cc:<{1}>'.format(to, cc)
 	s = smtplib.SMTP('mail.t-online.hu', 25)
 	s.starttls()
-	s.login('', '')
+	s.login('agombas@t-online.hu', 'tdk4g8mH')
 	s.sendmail(me, [to, cc], msg.as_string())
 	s.quit()
 

@@ -1,6 +1,9 @@
 <html>
-	<head>Email Configuration</head>
-	
+	<head>
+		<title>Email Configuration</title>
+		<meta name="decorator" content="atl.admin" />
+	</head>
+
 	<script type="text/javascript">
 		function setPort()
 		{
@@ -50,16 +53,11 @@
 			}
 		}
 	</script>
-	
+
 	<body>
 		<div class="thickPadded">
 			<form name="editmailconfiguration_form" method="POST" action="doeditmailconfiguration.action">
 				<table class="greyBox" width="400" cellpadding="2" cellspacing="4">
-					<tr>
-						<td colspan="2">
-							<div class="steptitle">Mail to News: Email Configuration</div>
-						</td>
-					</tr>
 					#tag( TextField "label='Server'" "name='mailConfiguration.server'" "size='50'" )
 					#tag( Select "label='Protocol'" "name='mailConfiguration.protocol'" "list={'IMAP', 'POP3'}" "onchange='setPort()'")
 					<tr>
@@ -69,7 +67,7 @@
     					<td>
     						<input type="checkbox" name="mailConfiguration.secure" id="mailConfiguration.secure" value="true" #if ($mailConfiguration.secure) checked="checked" #end onclick="setPort()"/>
           				</td>
-    				</tr>    
+    				</tr>
 					#tag( TextField "label='Port'" "name='mailConfiguration.port'" "id='portField'" "size='4'" )
 					#tag( TextField "label='Username'" "name='mailConfiguration.username'" "size='50'" )
 					#tag( TextField "label='Password'" "name='mailConfiguration.password'" "size='50'" )
@@ -93,7 +91,7 @@
 			<form name="testmailconfiguration.form" method="POST" action="testmailconfiguration.action">
 				#tag( Submit "name='confirm'" "value='Test Configuration'" "theme='notable'" )
 			</form>
-		</div>	
+		</div>
 	</body>
-	
+
 </html>

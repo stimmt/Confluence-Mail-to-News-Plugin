@@ -1,13 +1,14 @@
 <html>
-	<head>EMail Configuration Tested</head>
-	
+	<head>
+		<title>Email Configuration Tested</title>
+		<meta name="decorator" content="atl.admin" />
+	</head>
+
 	<body>
 		<div class="thickPadded">
-			<div class="steptitle">Mail to News: Email Configuration Tested</div>
-			<br/>
 			<b>Result:</b> ${configurationTestResult}<br/>
 			<br/>
 			<a href="editmailconfiguration.action">Edit configuration</a>
-		</div>	
-	</body>	
+		</div>
+	</body>
 </html>

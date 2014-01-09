@@ -1,10 +1,11 @@
 <html>
-	<head>Email Configuration Saved</head>
-	
+	<head>
+		<title>Email Configuration Saved</title>
+		<meta name="decorator" content="atl.admin" />
+	</head>
+
 	<body>
 		<div class="thickPadded">
-			<div class="steptitle">Mail to News: Email Configuration Saved</div>
-			<br/>
 			The new settings are now active, there is no need to reload the plugin.<br/>
 			<br/>
 			<a href="editmailconfiguration.action">Edit configuration</a><br/>
@@ -13,7 +14,7 @@
 			<form name="testmailconfiguration.form" method="POST" action="testmailconfiguration.action">
 				#tag( Submit "name='confirm'" "value='Test Configuration'" "theme='notable'" )
 			</form>
-		</div>	
+		</div>
 	</body>
-	
+
 </html>
