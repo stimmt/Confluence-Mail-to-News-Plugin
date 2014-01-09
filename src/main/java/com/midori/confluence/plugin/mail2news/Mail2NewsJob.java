@@ -1052,7 +1052,7 @@ public class Mail2NewsJob extends AbstractJob {
 		/* set creating user */
 		String creatorEmail = getEmailAddressFromMessage(m);
 
-		String creatorName = "Anonymous";
+		String creatorName = null;
 		User creator = null;
 		if (creatorEmail != "")
 		{
