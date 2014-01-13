@@ -1,15 +1,15 @@
 /**
  * The configuration manager for the mail2news confluence plugin.
- * 
+ *
  * This software is licensed under the BSD license.
- * 
+ *
  * Copyright (c) 2008, Liip AG
  *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * - Redistributions of source code must retain the above copyright notice,
  *   this list of conditions and the following disclaimer.
  * - Redistributions in binary form must reproduce the above copyright notice,
@@ -18,7 +18,7 @@
  * - Neither the name of Liip AG nor the names of its contributors may be used
  *   to endorse or promote products derived from this software without
  *   specific prior written permission.
- *   
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -30,7 +30,7 @@
  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * @author   Roman Schlegel <roman@liip.ch>
  * @version  $Id$
  * @package  com.midori.confluence.plugin.mail2news.mail2news
@@ -49,10 +49,10 @@ import com.thoughtworks.xstream.XStream;
 public class ConfigurationManager {
 
     /**
-     * The bandana key for the configuration of this plugin. 
+     * The bandana key for the configuration of this plugin.
      */
     private static final String BANDANA_KEY = "com.midori.confluence.plugin.mail2news.mail2news.ConfigurationManager";
-    
+
     /**
      * The bandana context to access the configuration of this plugin.
      */
@@ -68,12 +68,12 @@ public class ConfigurationManager {
      * The XStream object used for serialisation.
      */
     private XStream xStream;
-    
+
     /**
      * The configuration object which holds the configuration of this plugin.
      */
     private MailConfiguration mailConfiguration = null;
-    
+
     /**
      * The log to which we will be logging infos and errors.
      */
@@ -81,17 +81,14 @@ public class ConfigurationManager {
 
     public ConfigurationManager()
     {
-        /* autowire this component */
         ContainerManager.autowireComponent(this);
-
-        /* load configuration */
         loadConfig();
-}
+    }
 
     /**
      * This method is automatically called by Confluence to pass the
      * bandana manager of this confluence instance.
-     * 
+     *
      * @param bandanaManager The bandana manager of this confluence manager
      */
     public void setBandanaManager(BandanaManager bandanaManager) {
@@ -134,7 +131,7 @@ public class ConfigurationManager {
                 /* initialise a default configuration */
                 mailConfiguration = new MailConfiguration();
             }
-            
+
         } catch (Exception e) {
             this.log.error("Could not load configuration.", e);
         }
@@ -163,22 +160,22 @@ public class ConfigurationManager {
             this.loadConfig();
         }
     }
-    
+
     /**
      * Get the mail configuration of this manager
-     * 
-     * @return Returns the mail configuration of this manager 
+     *
+     * @return Returns the mail configuration of this manager
      */
     public MailConfiguration getMailConfiguration()
     {
         return this.mailConfiguration;
     }
-    
+
     /**
      * Set the mail configuration of this manager.
      * NOTE: This does not yet save the configuration, call saveConfig()
      *       for this.
-     *       
+     *
      * @param mailConfiguration The mail configuration to set.
      */
     public void setMailConfiguration(MailConfiguration mailConfiguration)

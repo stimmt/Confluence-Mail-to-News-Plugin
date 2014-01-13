@@ -13,7 +13,7 @@ atla<html>
 		    <p>${configurationTestResult}</p>
 		</div>
 		<p>
-			<a class="aui-button" href="editmailconfiguration.action">Edit configuration</a>
+			<a class="aui-button" href="editmailconfiguration.action">Edit Configuration</a>
 		</p>
 	</body>
 </html>
