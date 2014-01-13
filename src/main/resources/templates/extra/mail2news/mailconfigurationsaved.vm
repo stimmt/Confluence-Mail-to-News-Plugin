@@ -5,16 +5,21 @@
 	</head>
 
 	<body>
-		<div class="thickPadded">
-			The new settings are now active, there is no need to reload the plugin.<br/>
-			<br/>
-			<a href="editmailconfiguration.action">Edit configuration</a><br/>
-			<br/>
-			<br/>
-			<form name="testmailconfiguration.form" method="POST" action="testmailconfiguration.action">
-				#tag( Submit "name='confirm'" "value='Test Configuration'" "theme='notable'" )
-			</form>
+		<div class="aui-message success">
+		    <p class="title">
+		        <span class="aui-icon icon-success"></span>
+		        <strong>Configuration saved</strong>
+		    </p>
+		    <p>The new settings are now active. No need to reload the plugin.</p>
 		</div>
+		<p>
+			<form class="aui" name="testmailconfiguration.form" method="post" action="testmailconfiguration.action">
+				<input class="button submit" type="submit" value="Test Configuration" id="comment-save-button" name="confirm">
+			</form>
+		</p>
+		<p>
+			<a href="editmailconfiguration.action">Edit configuration</a><br/>
+		</p>
 	</body>
 
 </html>

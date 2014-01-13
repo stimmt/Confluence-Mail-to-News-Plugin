@@ -1,14 +1,19 @@
-<html>
+atla<html>
 	<head>
-		<title>Email Configuration Tested</title>
+		<title>Test Email Configuration</title>
 		<meta name="decorator" content="atl.admin" />
 	</head>
 
 	<body>
-		<div class="thickPadded">
-			<b>Result:</b> ${configurationTestResult}<br/>
-			<br/>
-			<a href="editmailconfiguration.action">Edit configuration</a>
+		<div class="aui-message">
+		    <p class="title">
+		        <span class="aui-icon icon-info"></span>
+		        <strong>Configuration tested</strong>
+		    </p>
+		    <p>${configurationTestResult}</p>
 		</div>
+		<p>
+			<a class="aui-button" href="editmailconfiguration.action">Edit configuration</a>
+		</p>
 	</body>
 </html>

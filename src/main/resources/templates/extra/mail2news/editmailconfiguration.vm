@@ -7,6 +7,8 @@
 	<script type="text/javascript">
 		function setPort()
 		{
+alert("xxx!");
+
 			// get the SSL checkbox element
 			var sslField = document.editmailconfiguration_form.elements[2];
 			// get the protocol select element
@@ -55,43 +57,67 @@
 	</script>
 
 	<body>
-		<div class="thickPadded">
-			<form name="editmailconfiguration_form" method="POST" action="doeditmailconfiguration.action">
-				<table class="greyBox" width="400" cellpadding="2" cellspacing="4">
-					#tag( TextField "label='Server'" "name='mailConfiguration.server'" "size='50'" )
-					#tag( Select "label='Protocol'" "name='mailConfiguration.protocol'" "list={'IMAP', 'POP3'}" "onchange='setPort()'")
-					<tr>
-    					<td nowrap align="right"  valign="top"  >
-    						<label class="label" for="mailConfiguration.secure">Use SSL:</label>
-    					</td>
-    					<td>
-    						<input type="checkbox" name="mailConfiguration.secure" id="mailConfiguration.secure" value="true" #if ($mailConfiguration.secure) checked="checked" #end onclick="setPort()"/>
-          				</td>
-    				</tr>
-					#tag( TextField "label='Port'" "name='mailConfiguration.port'" "id='portField'" "size='4'" )
-					#tag( TextField "label='Username'" "name='mailConfiguration.username'" "size='50'" )
-					#tag( TextField "label='Password'" "name='mailConfiguration.password'" "size='50'" )
-					<tr>
-    					<td nowrap align="right"  valign="top"  >
-    						<label class="label" for="mailConfiguration.gallerymacro">Enable Gallery Macro:</label>
-    					</td>
-    					<td>
-							<input type="checkbox" name="mailConfiguration.gallerymacro" id="mailConfiguration.gallerymacro" value="true" #if ($mailConfiguration.gallerymacro) checked="checked" #end/>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2" style="text-align: center">
-							#tag( Submit "name='confirm'" "value='update.name'" "theme='notable'" )
-        				</td>
-					</tr>
-				</table>
+		<p>
+			<form class="aui" name="editmailconfiguration_form" method="POST" action="doeditmailconfiguration.action">
+	    		<fieldset>
+					<div class="field-group">
+						<label for="mailConfiguration.server">Server<span class="aui-icon icon-required"> required</span></label>
+	            		<input class="text" type="text" id="mailConfiguration.server" name="mailConfiguration.server" value="${mailConfiguration.server}">
+					</div>
+					<div class="field-group">
+						<label for="mailConfiguration.protocol">Protocol     ${mailConfiguration.protocol}</label>
+## #tag( Select "label='Protocol'" "name='mailConfiguration.protocol'" "list={'IMAP', 'POP3'}" "onchange='setPort()'")
+<select class="select" id="mailConfiguration.protocol" name="mailConfiguration.protocol" onchange="setPort()">
+	#foreach($p in ["IMAP", "POP3"])
+		<option value="${p.toLowerCase()}" #if($mailConfiguration.protocol == $p.toLowerCase()) selected="selected" #end>${p}</option>
+	#end
+</select>
+					</div>
+				</fieldset>
+				<fieldset class="group">
+					<legend><span>Use SSL</span></legend>
+					<div class="checkbox">
+						<input class="checkbox" type="checkbox" name="mailConfiguration.secure" id="mailConfiguration.secure" value="true" #if ($mailConfiguration.secure) checked="checked" #end onclick="setPort()"/>
+						<label for="mailConfiguration.secure">Enabled</label>
+					</div>
+				</fieldset>
+	    		<fieldset>
+					<div class="field-group">
+						<label for="mailConfiguration.port">Port<span class="aui-icon icon-required"> required</span></label>
+						<input class="text short-field" type="text" id="mailConfiguration.port" name="mailConfiguration.port" value="${mailConfiguration.port}">
+					</div>
+					<div class="field-group">
+						<label for="mailConfiguration.username">Username<span class="aui-icon icon-required"> required</span></label>
+						<input class="text" type="text" id="mailConfiguration.username" name="mailConfiguration.username" value="${mailConfiguration.username}">
+					</div>
+					<div class="field-group">
+						<label for="mailConfiguration.password">Password<span class="aui-icon icon-required"> required</span></label>
+						<input class="password" type="password" id="mailConfiguration.password" name="mailConfiguration.password" value="${mailConfiguration.password}">
+					</div>
+				</fieldset>
+	    		<fieldset class="group">
+					<legend><span>Gallery Macro</span></legend>
+					<div class="checkbox">
+						<input class="checkbox" type="checkbox" name="mailConfiguration.gallerymacro" id="mailConfiguration.gallerymacro" value="true" #if ($mailConfiguration.gallerymacro) checked="checked" #end/>
+						<label for="mailConfiguration.gallerymacro">Enabled</label>
+					</div>
+				</fieldset>
+				<div class="buttons-container">
+					<div class="buttons">
+            			<input class="button submit" type="submit" value="Save" id="confirm">
+        			</div>
+				</div>
 			</form>
-			<br/>
-			<br/>
-			<form name="testmailconfiguration.form" method="POST" action="testmailconfiguration.action">
-				#tag( Submit "name='confirm'" "value='Test Configuration'" "theme='notable'" )
+		</p>
+		<p style="margin-top:1.5em">
+			<form class="aui" name="testmailconfiguration.form" method="post" action="testmailconfiguration.action">
+				<div class="buttons-container">
+					<div class="buttons">
+						<input class="button submit" type="submit" value="Test Configuration" id="comment-save-button" name="confirm">
+					</div>
+				</div>
 			</form>
-		</div>
+		</p>
 	</body>
 
 </html>
