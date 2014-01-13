@@ -4,59 +4,60 @@
 		<meta name="decorator" content="atl.admin" />
 	</head>
 
-	<script type="text/javascript">
-		function setPort()
-		{
-alert("xxx!");
-
-			// get the SSL checkbox element
-			var sslField = document.editmailconfiguration_form.elements[2];
-			// get the protocol select element
-			var protocolField = document.editmailconfiguration_form.elements[1];
-			// get the currently selected protocol from the select element
-			var protocol = protocolField.options[protocolField.options.selectedIndex].value;
-			// get the port textfield
-			var portField = document.editmailconfiguration_form.elements[3];
-			if (sslField.checked)
-			{
-				// SSL is checkded
-				// set port according to selected protocol
-				if (protocol == 'IMAP')
-				{
-					portField.value = '993';
-				}
-				else if (protocol == 'POP3')
-				{
-					portField.value = '995';
-				}
-				else
-				{
-					// error
-					portField.value = '0';
-				}
-			}
-			else
-			{
-				// SSL is not set
-				// set port according to selected protocol
-				if (protocol == 'IMAP')
-				{
-					portField.value = '143';
-				}
-				else if (protocol == 'POP3')
-				{
-					portField.value = '110';
-				}
-				else
-				{
-					// error
-					portField.value = '0';
-				}
-			}
-		}
-	</script>
-
 	<body>
+		<script type="text/javascript">
+			function setPort()
+			{
+				// get the SSL checkbox element
+				var sslField = document.getElementById("mailConfiguration.secure");
+
+				// get the protocol select element
+				var protocolField = document.getElementById("mailConfiguration.protocol");
+				// get the currently selected protocol from the select element
+				var protocol = protocolField.options[protocolField.options.selectedIndex].value;
+
+				// get the port textfield
+				var portField = document.getElementById("mailConfiguration.port");
+
+				if (sslField.checked)
+				{
+					// SSL is checkded
+					// set port according to selected protocol
+					if (protocol == 'imap')
+					{
+						portField.value = '993';
+					}
+					else if (protocol == 'pop3')
+					{
+						portField.value = '995';
+					}
+					else
+					{
+						// error
+						portField.value = '0';
+					}
+				}
+				else
+				{
+					// SSL is not set
+					// set port according to selected protocol
+					if (protocol == 'imap')
+					{
+						portField.value = '143';
+					}
+					else if (protocol == 'pop3')
+					{
+						portField.value = '110';
+					}
+					else
+					{
+						// error
+						portField.value = '0';
+					}
+				}
+			}
+		</script>
+
 		<p>
 			<form class="aui" name="editmailconfiguration_form" method="POST" action="doeditmailconfiguration.action">
 	    		<fieldset>
@@ -65,13 +66,12 @@ alert("xxx!");
 	            		<input class="text" type="text" id="mailConfiguration.server" name="mailConfiguration.server" value="${mailConfiguration.server}">
 					</div>
 					<div class="field-group">
-						<label for="mailConfiguration.protocol">Protocol     ${mailConfiguration.protocol}</label>
-## #tag( Select "label='Protocol'" "name='mailConfiguration.protocol'" "list={'IMAP', 'POP3'}" "onchange='setPort()'")
-<select class="select" id="mailConfiguration.protocol" name="mailConfiguration.protocol" onchange="setPort()">
-	#foreach($p in ["IMAP", "POP3"])
-		<option value="${p.toLowerCase()}" #if($mailConfiguration.protocol == $p.toLowerCase()) selected="selected" #end>${p}</option>
-	#end
-</select>
+						<label for="mailConfiguration.protocol">Protocol</label>
+						<select class="select" id="mailConfiguration.protocol" name="mailConfiguration.protocol" onchange="setPort()">
+							#foreach($p in ["IMAP", "POP3"])
+								<option value="${p.toLowerCase()}" #if($mailConfiguration.protocol == $p.toLowerCase()) selected="selected" #end>${p}</option>
+							#end
+						</select>
 					</div>
 				</fieldset>
 				<fieldset class="group">
