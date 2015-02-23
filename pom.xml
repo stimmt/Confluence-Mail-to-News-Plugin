@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.midori.confluence.plugin</groupId>
     <artifactId>mail2news</artifactId>
-    <version>1.11.0</version>
+    <version>1.12.0</version>
     <organization>
         <name>Stimmt AG - Midori</name>
         <url>http://www.stimmt.ch</url>
@@ -99,9 +99,9 @@
         </snapshotRepository>
     </distributionManagement>
     <properties>
-        <confluence.version>5.4.1</confluence.version>
-        <confluence.data.version>5.4.1</confluence.data.version>
-        <amps.version>4.2.10</amps.version>
+        <confluence.version>5.7</confluence.version>
+        <confluence.data.version>5.7</confluence.data.version>
+        <amps.version>4.2.11</amps.version>
         <upm.license.compatibility.version>2.4.1</upm.license.compatibility.version>
         <sal.api.version>2.4.0</sal.api.version>
         <atlassian.templaterenderer.version>1.0.5</atlassian.templaterenderer.version>
