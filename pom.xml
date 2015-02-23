@@ -101,9 +101,9 @@
     <properties>
         <confluence.version>5.7</confluence.version>
         <confluence.data.version>5.7</confluence.data.version>
-        <amps.version>4.2.11</amps.version>
+        <amps.version>5.0.13</amps.version>
         <upm.license.compatibility.version>2.4.1</upm.license.compatibility.version>
-        <sal.api.version>2.4.0</sal.api.version>
+        <sal.api.version>2.10.10</sal.api.version>
         <atlassian.templaterenderer.version>1.0.5</atlassian.templaterenderer.version>
     </properties>
 </project>
