@@ -1025,11 +1025,11 @@ public class Mail2NewsJob extends AbstractJob {
 		/* set the blog post content */
 		if (blogEntryContent != null)
 		{
-			blogPost.setContent(blogEntryContent);
+			blogPost.setBodyAsString(blogEntryContent);
 		}
 		else
 		{
-			blogPost.setContent("");
+			blogPost.setBodyAsString("");
 		}
 		/* set the title of the blog post */
 		String title = m.getSubject();
