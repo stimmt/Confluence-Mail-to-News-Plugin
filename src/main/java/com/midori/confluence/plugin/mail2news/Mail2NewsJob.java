@@ -162,13 +162,13 @@ public class Mail2NewsJob extends AbstractJob {
 	 *
 	 * @see com.atlassian.quartz.jobs.AbstractJob#doExecute(org.quartz.JobExecutionContext)
 	 */
-	public void doExecute(final JobExecutionContext arg0) throws JobExecutionException { // TODO rename arg
+	public void doExecute(final JobExecutionContext jobExecutionContext) throws JobExecutionException {
 		transactionTemplate.execute(new TransactionCallback<Void>() {
 			public Void doInTransaction() {
 				try {
-					doExecute__OLD(arg0); // TODO rename
+					doExecuteInTransaction(jobExecutionContext);
 				} catch(JobExecutionException ex) {
-					log.error(String.format("Failed to execute job <%s>", arg0.getJobDetail().getName()), ex);
+					log.error(String.format("Failed to execute job <%s>", jobExecutionContext.getJobDetail().getName()), ex);
 				}
 
 				return null;
@@ -176,8 +176,8 @@ public class Mail2NewsJob extends AbstractJob {
 		});
 	}
 
-	public void doExecute__OLD(JobExecutionContext arg0)
-			throws JobExecutionException { // TODO rename arg, make protected
+	private void doExecuteInTransaction(JobExecutionContext jobExecutionContext)
+			throws JobExecutionException {
 
 		/* The mailstore object used to connect to the server */
 		Store store = null;
