@@ -89,37 +89,20 @@ import com.atlassian.confluence.util.GeneralUtil;
 import com.atlassian.mail.MailFactory;
 import com.atlassian.mail.server.SMTPMailServer;
 import com.atlassian.quartz.jobs.AbstractJob;
+import com.atlassian.sal.api.transaction.TransactionCallback;
+import com.atlassian.sal.api.transaction.TransactionTemplate;
 import com.atlassian.spring.container.ContainerManager;
 import com.atlassian.user.User;
 import com.atlassian.user.search.SearchResult;
 import com.atlassian.user.search.page.Pager;
 
 public class Mail2NewsJob extends AbstractJob {
-
-	/**
-	 * The log to which we will be logging infos and errors.
-	 */
 	protected final Logger log = Logger.getLogger(this.getClass());
 
-	/**
-	 * The page manager of this Confluence instance
-	 */
-	private PageManager pageManager;
-
-	/**
-	 * The space manager of this Confluence instance
-	 */
-	private SpaceManager spaceManager;
-
-	/**
-	 * The attachment manager of this Confluence instance
-	 */
 	private AttachmentManager attachmentManager;
-
-	/**
-	 * The user accessor of this Confluence instance, used to find
-	 * users.
-	 */
+	private PageManager pageManager;
+	private SpaceManager spaceManager;
+	private TransactionTemplate transactionTemplate;
 	private UserAccessor userAccessor;
 
 	/**
@@ -149,18 +132,28 @@ public class Mail2NewsJob extends AbstractJob {
 	 */
 	private boolean containsImage;
 
-	/**
-	 * The default constructor. Autowires this component and creates a
-	 * new configuration manager.
-	 */
 	public Mail2NewsJob() {
-		/* autowire this component (this means that the space and
-		 * page manager are automatically set by confluence */
-		ContainerManager.autowireComponent(this);
-
-		/* create the configuration manager */
 		this.configurationManager = new ConfigurationManager();
+	}
 
+	public void setPageManager(PageManager pageManager) {
+		this.pageManager = pageManager;
+	}
+
+	public void setSpaceManager(SpaceManager spaceManager) {
+		this.spaceManager = spaceManager;
+	}
+
+	public void setAttachmentManager(AttachmentManager attachmentManager) {
+		this.attachmentManager = attachmentManager;
+	}
+
+	public void setUserAccessor(UserAccessor userAccessor) {
+		this.userAccessor = userAccessor;
+	}
+
+	public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
+		this.transactionTemplate = transactionTemplate;
 	}
 
 	/**
@@ -169,7 +162,21 @@ public class Mail2NewsJob extends AbstractJob {
 	 *
 	 * @see com.atlassian.quartz.jobs.AbstractJob#doExecute(org.quartz.JobExecutionContext)
 	 */
-	public void doExecute(JobExecutionContext arg0)
+	public void doExecute(final JobExecutionContext jobExecutionContext) throws JobExecutionException {
+		transactionTemplate.execute(new TransactionCallback<Void>() {
+			public Void doInTransaction() {
+				try {
+					doExecuteInTransaction(jobExecutionContext);
+				} catch(JobExecutionException ex) {
+					log.error(String.format("Failed to execute job <%s>", jobExecutionContext.getJobDetail().getName()), ex);
+				}
+
+				return null;
+			}
+		});
+	}
+
+	private void doExecuteInTransaction(JobExecutionContext jobExecutionContext)
 			throws JobExecutionException {
 
 		/* The mailstore object used to connect to the server */
@@ -1148,49 +1155,5 @@ public class Mail2NewsJob extends AbstractJob {
 	 */
 	protected boolean allowConcurrentExecution() {
 		return false;
-	}
-
-	/**
-	 * This method is automatically called by Confluence to pass the
-	 * PageManager of this Confluence instance.
-	 *
-	 * @param pageManager The PageManager of this Confluence instance
-	 */
-	public void setPageManager(PageManager pageManager)
-	{
-		this.pageManager = pageManager;
-	}
-
-	/**
-	 * This method is automatically called by Confluence to pass the
-	 * SpaceManager of this Confluence instance.
-	 *
-	 * @param pageManager The PageManager of this Confluence instance
-	 */
-	public void setSpaceManager(SpaceManager spaceManager)
-	{
-		this.spaceManager = spaceManager;
-	}
-
-	/**
-	 * This method is automatically called by Confluence to pass the
-	 * AttachmentManager of this Confluence instance.
-	 *
-	 * @param attachmentManager The AttachmentManager of this Confluence instance
-	 */
-	public void setAttachmentManager(AttachmentManager attachmentManager)
-	{
-		this.attachmentManager = attachmentManager;
-	}
-
-	/**
-	 * This method is automatically called by Confluence to pass the
-	 * UserAccessor of this Confluence instance.
-	 *
-	 * @param userAccessor The UserAccessor of this Confluence instance
-	 */
-	public void setUserAccessor(UserAccessor userAccessor)
-	{
-		this.userAccessor = userAccessor;
 	}
 }
