@@ -753,7 +753,7 @@ public class Mail2NewsJob extends AbstractJob {
 			String currentLine = null;
 
 			while ((currentLine = br.readLine()) != null) {
-				blogEntryContent = blogEntryContent.concat(currentLine).concat("\r\n");
+				blogEntryContent = blogEntryContent.concat(currentLine).concat("<br/>");
 			}
 		}
 		else

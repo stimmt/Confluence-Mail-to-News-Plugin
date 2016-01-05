@@ -23,13 +23,13 @@ def send(to, cc, subject, body):
 	s.quit()
 
 # send mails to post into an invalid space
-send('midori.test1@gmail.com,wikispace+nosuch@domain.net', '', 'Invalid To', 'This should not appear in Confluence. Was posted with an invalid To.')
-send('midori.test1@gmail.com', 'wikispace+nosuch@domain.net',  'Invalid Cc', 'This should not appear in Confluence. Was posted with an invalid Cc.')
+send('midori.test1@gmail.com,wikispace+nosuch@domain.net', '', 'Invalid To', 'This should not appear in Confluence.\n(Was posted with an invalid To.)\n\nRegards,\n- Mail to News Plugin')
+send('midori.test1@gmail.com', 'wikispace+nosuch@domain.net',  'Invalid Cc', 'This should not appear in Confluence.\n(Was posted with an invalid Cc.)\n\nRegards,\n- Mail to News Plugin')
 
 # send mails to post into a global space
-send('midori.test1@gmail.com,wikispace+ds@domain.net', '', 'Demo Space via To', 'This should appear in Demonstration Space. Was posted via To.')
-send('midori.test1@gmail.com', 'wikispace+ds@domain.net',  'Demo Space via Cc', 'This should appear in Demonstration Space. Was posted via Cc.')
+send('midori.test1@gmail.com,wikispace+ds@domain.net', '', 'Demo Space via To', 'This should appear in Demonstration Space.\n(Was posted via To).\n\nRegards,\n- Mail to News Plugin')
+send('midori.test1@gmail.com', 'wikispace+ds@domain.net',  'Demo Space via Cc', 'This should appear in Demonstration Space.\n(Was posted via Cc).\n\nRegards,\n- Mail to News Plugin')
 
 # send mails to post into a personal space
-send('midori.test1@gmail.com,wikispace+admin@domain.net', '', 'Admin\'s Personal Space via To', 'This should appear in Admin\'s Personal Space. Was posted via To.')
-send('midori.test1@gmail.com', 'wikispace+admin@domain.net',  'Admin\'s Personal Space via Cc', 'This should appear in Admin\'s Personal Space. Was posted via Cc.')
+send('midori.test1@gmail.com,wikispace+admin@domain.net', '', 'Admin\'s Personal Space via To', 'This should appear in Admin\'s Personal Space.\n(Was posted via To).\n\nRegards,\n- Mail to News Plugin')
+send('midori.test1@gmail.com', 'wikispace+admin@domain.net',  'Admin\'s Personal Space via Cc', 'This should appear in Admin\'s Personal Space.\n(Was posted via Cc).\n\nRegards,\n- Mail to News Plugin')
