@@ -3,17 +3,26 @@
 
 import smtplib
 import time
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 def send(to, cc, subject, body):
 	me = "info@midori.hu"
 
-	msg = MIMEText(body)
+	msg = MIMEMultipart()
 	msg['From'] = me
 	msg['To'] = to
 	msg['Cc'] = cc
 	msg['Subject'] = '@' + time.strftime('%X') + ' - Test for Mail to News Plugin: ' + subject + '!'
+	
+	msg.attach(MIMEText(body))
 
+	fp = open("test.png", 'rb')
+	img = MIMEImage(fp.read(), Name="test.png")
+	fp.close()
+	msg.attach(img)
+            
 	# send
 	print 'sending to:<{0}>, cc:<{1}>'.format(to, cc)
 	s = smtplib.SMTP('mail.t-online.hu', 25)

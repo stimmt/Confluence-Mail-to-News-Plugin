@@ -114,7 +114,7 @@ public class Mail2NewsJob extends AbstractJob {
 
 	/**
 	 * The content of a message, this will be the content of the
-	 * news entry
+	 * news entry.
 	 */
 	private String blogEntryContent;
 
@@ -752,9 +752,11 @@ public class Mail2NewsJob extends AbstractJob {
 			}
 			String currentLine = null;
 
+			blogEntryContent = "<p>";
 			while ((currentLine = br.readLine()) != null) {
-				blogEntryContent = blogEntryContent.concat(currentLine).concat("<br/>");
+				blogEntryContent += currentLine + "<br/>";
 			}
+			blogEntryContent += "</p>";
 		}
 		else
 		{
@@ -1026,12 +1028,13 @@ public class Mail2NewsJob extends AbstractJob {
 			{
 				/* post contains an image */
 				/* add the macro */
-				blogEntryContent = blogEntryContent.concat("{gallery}");
+				blogEntryContent = blogEntryContent.concat("<p><ac:structured-macro ac:name=\"gallery\"/></p>");
 			}
 		}
 		/* set the blog post content */
 		if (blogEntryContent != null)
 		{
+			log.debug("Blog entry content converted:\n" + blogEntryContent);
 			blogPost.setBodyAsString(blogEntryContent);
 		}
 		else
@@ -1068,16 +1071,24 @@ public class Mail2NewsJob extends AbstractJob {
 			Pager p = sr.pager();
 			List l = p.getCurrentPage();
 
-			if (l.size() == 1)
+			if (l.size() > 0)
 			{
 				/* found a matching user for the email address of the sender */
 				creator = (User)l.get(0);
 				creatorName = creator.getName();
+
+				if(l.size() > 1)
+				{
+					log.warn(String.format("Email sender address <%s> is set for %d user accounts, using <%s> as blog post submitter", creatorEmail, l.size(), creatorName));
+				}
+			}
+			else
+			{
+				log.warn(String.format("Email sender address <%s> is not set for any user, using anonymous as blog post submitter", creatorEmail));
 			}
 		}
 
-		//this.log.info("creatorName: " + creatorName);
-		//this.log.info("creator: " + creator);
+
 		blogPost.setCreatorName(creatorName);
 
 		if (creator != null)
